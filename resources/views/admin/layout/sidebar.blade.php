@@ -30,7 +30,12 @@
                         @endif
                     </a>
                 </li>
-                <li class="nav-item"><a href="{{ route('admin.user.access.control.index') }}" class="nav-link {{ Route::is('admin.settings.user.access.control.*') ? 'active' : null }}">User Access Control</a></li>
+                @can('rolePermission.view')
+                    <li class="nav-item"><a href="{{ route('admin.user.access.control.index') }}" class="nav-link {{ Route::is('admin.user.access.control.*') ? 'active' : null }}">User Access Control</a></li>
+                @endcan
+                @can('teacher.view')
+                    <li class="nav-item"><a href="{{ route('admin.teachers.index') }}" class="nav-link {{ Route::is('admin.teachers.*') ? 'active' : null }}">Teachers</a></li>
+                @endcan
             </ul>
         </div>
     </div>

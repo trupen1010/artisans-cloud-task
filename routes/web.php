@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\UserAccessController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,17 @@ Route::group(['prefix' => 'admin'], static function () {
             'edit' => 'admin.user.access.control.edit',
             'update' => 'admin.user.access.control.update',
             'destroy' => 'admin.user.access.control.destroy',
+        ])->except(['show']);
+
+        // ? Teachers
+        Route::post('teachers/datatable', [TeacherController::class, 'datatable'])->name('admin.teachers.datatable');
+        Route::resource('teachers', TeacherController::class)->names([
+            'index' => 'admin.teachers.index',
+            'create' => 'admin.teachers.create',
+            'store' => 'admin.teachers.store',
+            'edit' => 'admin.teachers.edit',
+            'update' => 'admin.teachers.update',
+            'destroy' => 'admin.teachers.destroy',
         ])->except(['show']);
 
         // Optimize Clear
