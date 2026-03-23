@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "/usr/bin/php",
+            "args": [
+                "/data/trupen/trupen/task/artisans-cloud-task/artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}
