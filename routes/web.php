@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SettingController;
@@ -41,6 +42,17 @@ Route::group(['prefix' => 'admin'], static function () {
             'edit' => 'admin.teachers.edit',
             'update' => 'admin.teachers.update',
             'destroy' => 'admin.teachers.destroy',
+        ])->except(['show']);
+
+        // ? Announcements
+        Route::post('announcements/datatable', [AnnouncementController::class, 'datatable'])->name('admin.announcements.datatable');
+        Route::resource('announcements', AnnouncementController::class)->names([
+            'index' => 'admin.announcements.index',
+            'create' => 'admin.announcements.create',
+            'store' => 'admin.announcements.store',
+            'edit' => 'admin.announcements.edit',
+            'update' => 'admin.announcements.update',
+            'destroy' => 'admin.announcements.destroy',
         ])->except(['show']);
 
         // Optimize Clear

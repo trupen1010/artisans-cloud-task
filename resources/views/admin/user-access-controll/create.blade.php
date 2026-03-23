@@ -6,7 +6,7 @@
     ],
     [
         'title' => 'User Access Controll Create',
-        'url' => route('admin.settings.user.access.control.create')
+        'url' => route('admin.user.access.control.create')
     ]]
  ])
 
@@ -36,7 +36,7 @@
 @section('content')
 
 
-<form action="{{ route('admin.settings.user.access.control.store') }}" method="post">
+<form action="{{ route('admin.user.access.control.store') }}" method="post">
     @csrf
     {{ method_field('post') }}
     <div class="row">
@@ -96,7 +96,7 @@
                 </div>
                 <div class="col-lg-12 text-end">
                     <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
-                    <a href="{{ route('admin.settings.user.access.control.index') }}" type="reset" class="btn btn-link link-danger waves-effect waves-light fw-semibold">Cancel</a>
+                    <a href="{{ route('admin.user.access.control.index') }}" type="reset" class="btn btn-link link-danger waves-effect waves-light fw-semibold">Cancel</a>
                 </div>
             </div>
         </div>

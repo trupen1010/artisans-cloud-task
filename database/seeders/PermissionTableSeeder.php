@@ -34,6 +34,8 @@ class PermissionTableSeeder extends Seeder
                 'rolePermission' => ['permissions' => ['view', 'add', 'edit', 'delete'], 'permission_display_name' => ['Can view role details', 'Can add a role', 'Can modify a role', 'Can delete a role'], 'module_display_name' => 'Role Permission'],
                 // ? Teacher Permissions
                 'teacher' => ['permissions' => ['view', 'add', 'edit', 'delete'], 'permission_display_name' => ['Can view teachers', 'Can add a teacher', 'Can modify a teacher', 'Can delete a teacher'], 'module_display_name' => 'Teacher'],
+                // ? Announcement Permissions
+                'announcement' => ['permissions' => ['view', 'add', 'edit', 'delete'], 'permission_display_name' => ['Can view announcements', 'Can add an announcement', 'Can modify an announcement', 'Can delete an announcement'], 'module_display_name' => 'Announcement'],
             ];
 
             foreach ($modulePermissions as $module => $moduleData) {

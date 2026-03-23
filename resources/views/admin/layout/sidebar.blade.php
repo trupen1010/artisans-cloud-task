@@ -36,6 +36,9 @@
                 @can('teacher.view')
                     <li class="nav-item"><a href="{{ route('admin.teachers.index') }}" class="nav-link {{ Route::is('admin.teachers.*') ? 'active' : null }}">Teachers</a></li>
                 @endcan
+                @can('announcement.view')
+                    <li class="nav-item"><a href="{{ route('admin.announcements.index') }}" class="nav-link {{ Route::is('admin.announcements.*') ? 'active' : null }}">Announcements</a></li>
+                @endcan
             </ul>
         </div>
     </div>
