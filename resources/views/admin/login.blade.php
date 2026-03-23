@@ -72,7 +72,7 @@
                                     <p class="text-muted">Sign in to continue to <strong class="fw-bolder">{{ config('app.name') }}</strong></p>
                                 </div>
                                 <div class="p-2 mt-4">
-                                    <form action="" method="post">
+                                    <form action="{{ route("admin.auth")  }}" method="post">
                                         {{ csrf_field() }}
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Username</label>

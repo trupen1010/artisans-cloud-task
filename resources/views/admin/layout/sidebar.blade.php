@@ -30,6 +30,7 @@
                         @endif
                     </a>
                 </li>
+                <li class="nav-item"><a href="{{ route('admin.user.access.control.index') }}" class="nav-link {{ Route::is('admin.settings.user.access.control.*') ? 'active' : null }}">User Access Control</a></li>
             </ul>
         </div>
     </div>
