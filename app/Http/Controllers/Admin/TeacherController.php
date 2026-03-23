@@ -86,11 +86,8 @@ class TeacherController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            // Assign teacher role
-            $teacherRole = Role::where('name', 'Teacher')->first();
-            if ($teacherRole) {
-                $user->roles()->attach($teacherRole->id);
-            }
+            $teacherRole = Role::firstOrCreate(['name' => 'Teacher']);
+            $user->roles()->syncWithoutDetaching([$teacherRole->id]);
 
             Teacher::create([
                 'user_id' => $user->id,
@@ -137,6 +134,9 @@ class TeacherController extends Controller
             }
 
             $teacher->user->update($userData);
+
+            $teacherRole = Role::firstOrCreate(['name' => 'Teacher']);
+            $teacher->user->roles()->syncWithoutDetaching([$teacherRole->id]);
 
             $teacher->update([
                 'phone' => $request->phone,

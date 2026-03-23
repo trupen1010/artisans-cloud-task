@@ -41,6 +41,9 @@
 </head>
 
 <body>
+    @php
+        $layoutPrefix = request()->routeIs('teacher.*') ? 'teacher' : 'admin';
+    @endphp
 
     {{-- Start Loader --}}
     <div class="custom_loading" style="display: none;cursor: wait;">
@@ -57,13 +60,13 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box horizontal-logo">
-                            <a href="{{ route('admin.dashboard') }}" class="logo logo-dark">
+                            <a href="{{ route($layoutPrefix.'.dashboard') }}" class="logo logo-dark">
                                 <span class="logo-sm"><img src="{{ public_assets('images/logo-sm.png', true) }}"
                                         alt="" height="22"></span>
                                 <span class="logo-lg"><img src="{{ public_assets('images/logo-dark.png', true) }}"
                                         alt="" height="17"></span>
                             </a>
-                            <a href="{{ route('admin.dashboard') }}" class="logo logo-light">
+                            <a href="{{ route($layoutPrefix.'.dashboard') }}" class="logo logo-light">
                                 <span class="logo-sm"><img src="{{ public_assets('images/logo-sm.png', true) }}"
                                         alt="" height="22"></span>
                                 <span class="logo-lg"><img src="{{ public_assets('images/logo.png', true) }}"
@@ -120,7 +123,7 @@
         </header>
 
         {{-- ? Sidebar ? --}}
-        @include('admin.layout.sidebar')
+        @include($layoutPrefix.'.layout.sidebar')
         {{-- ? Sidebar ? --}}
 
         <div class="main-content">
@@ -131,7 +134,7 @@
                             <div class="page-title-box d-flex justify-content-between align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i
+                                        <li class="breadcrumb-item"><a href="{{ route($layoutPrefix.'.dashboard') }}"><i
                                                     class="ri-home-5-fill"></i></a></li>
                                         @if (isset($breadcrumbs) && is_array($breadcrumbs))
                                             @foreach ($breadcrumbs as $breadcrumb)

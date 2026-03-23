@@ -39,6 +39,11 @@
                 @can('announcement.view')
                     <li class="nav-item"><a href="{{ route('admin.announcements.index') }}" class="nav-link {{ Route::is('admin.announcements.*') ? 'active' : null }}">Announcements</a></li>
                 @endcan
+                @can('report.view')
+                    <li class="nav-item"><a href="{{ route('admin.reports.students') }}" class="nav-link {{ Route::is('admin.reports.students') ? 'active' : null }}">Student Reports</a></li>
+                    <li class="nav-item"><a href="{{ route('admin.reports.parents') }}" class="nav-link {{ Route::is('admin.reports.parents') ? 'active' : null }}">Parent Reports</a></li>
+                    <li class="nav-item"><a href="{{ route('admin.reports.announcements') }}" class="nav-link {{ Route::is('admin.reports.announcements') ? 'active' : null }}">Announcement Reports</a></li>
+                @endcan
             </ul>
         </div>
     </div>

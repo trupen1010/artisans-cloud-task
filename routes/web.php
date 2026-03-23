@@ -3,9 +3,13 @@
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\UserAccessController;
+use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
+use App\Http\Controllers\Teacher\ParentController;
+use App\Http\Controllers\Teacher\StudentController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -55,7 +59,27 @@ Route::group(['prefix' => 'admin'], static function () {
             'destroy' => 'admin.announcements.destroy',
         ])->except(['show']);
 
+        // Admin Reports - Read Only
+        Route::get('reports/students', [ReportController::class, 'students'])->name('admin.reports.students');
+        Route::post('reports/students/datatable', [ReportController::class, 'studentsDatatable'])->name('admin.reports.students.datatable');
+
+        Route::get('reports/parents', [ReportController::class, 'parents'])->name('admin.reports.parents');
+        Route::post('reports/parents/datatable', [ReportController::class, 'parentsDatatable'])->name('admin.reports.parents.datatable');
+
+        Route::get('reports/announcements', [ReportController::class, 'teacherAnnouncements'])->name('admin.reports.announcements');
+        Route::post('reports/announcements/datatable', [ReportController::class, 'announcementsDatatable'])->name('admin.reports.announcements.datatable');
+
         // Optimize Clear
         Route::get('settings/optimize', [SettingController::class, 'optimize'])->name('admin.settings.general.optimize');
     });
+});
+
+Route::middleware(['auth-web', 'role:teacher'])->prefix('teacher')->name('teacher.')->group(static function () {
+    Route::get('dashboard', [TeacherDashboardController::class, 'index'])->name('dashboard');
+
+    Route::post('students/datatable', [StudentController::class, 'datatable'])->name('students.datatable');
+    Route::resource('students', StudentController::class)->except(['show']);
+
+    Route::post('parents/datatable', [ParentController::class, 'datatable'])->name('parents.datatable');
+    Route::resource('parents', ParentController::class)->except(['show']);
 });

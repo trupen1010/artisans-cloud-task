@@ -36,6 +36,12 @@ class PermissionTableSeeder extends Seeder
                 'teacher' => ['permissions' => ['view', 'add', 'edit', 'delete'], 'permission_display_name' => ['Can view teachers', 'Can add a teacher', 'Can modify a teacher', 'Can delete a teacher'], 'module_display_name' => 'Teacher'],
                 // ? Announcement Permissions
                 'announcement' => ['permissions' => ['view', 'add', 'edit', 'delete'], 'permission_display_name' => ['Can view announcements', 'Can add an announcement', 'Can modify an announcement', 'Can delete an announcement'], 'module_display_name' => 'Announcement'],
+                // ? Report Permissions
+                'report' => ['permissions' => ['view'], 'permission_display_name' => ['Can view reports'], 'module_display_name' => 'Report'],
+                // ? Student Permissions
+                'student' => ['permissions' => ['view', 'add', 'edit', 'delete'], 'permission_display_name' => ['Can view students', 'Can add a student', 'Can modify a student', 'Can delete a student'], 'module_display_name' => 'Student'],
+                // ? Parent Permissions
+                'parent' => ['permissions' => ['view', 'add', 'edit', 'delete'], 'permission_display_name' => ['Can view parents', 'Can add a parent', 'Can modify a parent', 'Can delete a parent'], 'module_display_name' => 'Parent'],
             ];
 
             foreach ($modulePermissions as $module => $moduleData) {

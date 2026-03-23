@@ -9,24 +9,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-#[Fillable(['user_id', 'phone', 'status'])]
+#[Fillable(['teacher_id', 'name', 'email', 'phone', 'status'])]
 #[Hidden(['created_at', 'updated_at', 'deleted_at'])]
-class Teacher extends Model
+class ParentModel extends Model
 {
     use SoftDeletes;
 
-    public function user(): BelongsTo
+    protected $table = 'parents';
+
+    public function teacher(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Teacher::class);
     }
 
     public function students(): HasMany
     {
-        return $this->hasMany(Student::class);
-    }
-
-    public function parents(): HasMany
-    {
-        return $this->hasMany(ParentModel::class);
+        return $this->hasMany(Student::class, 'parent_id');
     }
 }
