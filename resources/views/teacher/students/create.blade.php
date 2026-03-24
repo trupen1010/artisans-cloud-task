@@ -52,29 +52,19 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
-                                    <div class="form-floating">
-                                        <select name="parent_id" class="form-select" id="parent_id">
-                                            <option value="">Select Parent (Optional)</option>
-                                            @foreach($parents as $parent)
-                                                <option value="{{ $parent->id }}" {{ old('parent_id') == $parent->id ? 'selected' : '' }}>{{ $parent->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <label for="parent_id">Parent</label>
-                                        <b class="text-danger">{{ $errors->first('parent_id') }}</b>
-                                    </div>
-                                </div>
+                                <x-forms.dropdown
+                                    name="parent_id"
+                                    label="Parent"
+                                    :options="collect($parents)->pluck('name', 'id')->toArray()"
+                                    placeholder="Select Parent (Optional)"
+                                />
 
-                                <div class="col-lg-6">
-                                    <div class="form-floating">
-                                        <select name="status" class="form-select" id="status">
-                                            <option value="active" {{ old('status') === 'active' ? 'selected' : '' }}>Active</option>
-                                            <option value="inactive" {{ old('status') === 'inactive' ? 'selected' : '' }}>Inactive</option>
-                                        </select>
-                                        <label for="status">Status <span class="text-danger">*</span></label>
-                                        <b class="text-danger">{{ $errors->first('status') }}</b>
-                                    </div>
-                                </div>
+                                <x-forms.dropdown
+                                    name="status"
+                                    label="Status"
+                                    :options="['active' => 'Active', 'inactive' => 'Inactive']"
+                                    :required="true"
+                                />
                             </div>
                         </div>
                     </div>

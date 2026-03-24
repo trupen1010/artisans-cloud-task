@@ -52,16 +52,12 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
-                                    <div class="form-floating">
-                                        <select name="status" class="form-select" id="status">
-                                            <option value="active" {{ old('status') === 'active' ? 'selected' : '' }}>Active</option>
-                                            <option value="inactive" {{ old('status') === 'inactive' ? 'selected' : '' }}>Inactive</option>
-                                        </select>
-                                        <label for="status">Status <span class="text-danger">*</span></label>
-                                        <b class="text-danger">{{ $errors->first('status') }}</b>
-                                    </div>
-                                </div>
+                                <x-forms.dropdown
+                                    name="status"
+                                    label="Status"
+                                    :options="['active' => 'Active', 'inactive' => 'Inactive']"
+                                    :required="true"
+                                />
                             </div>
                         </div>
                     </div>

@@ -28,18 +28,17 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6">
-                            <div class="form-floating">
-                                <select name="target" class="form-select" id="target">
-                                    <option value="">Select Target</option>
-                                    <option value="students" {{ old('target') === 'students' ? 'selected' : '' }}>Students Only</option>
-                                    <option value="parents"  {{ old('target') === 'parents'  ? 'selected' : '' }}>Parents Only</option>
-                                    <option value="both"     {{ old('target') === 'both'     ? 'selected' : '' }}>Both (Students & Parents)</option>
-                                </select>
-                                <label for="target">Send To <span class="text-danger">*</span></label>
-                                <b class="text-danger">{{ $errors->first('target') }}</b>
-                            </div>
-                        </div>
+                        <x-forms.dropdown
+                            name="target"
+                            label="Send To"
+                            :options="[
+                                'students' => 'Students Only',
+                                'parents' => 'Parents Only',
+                                'both' => 'Both (Students & Parents)'
+                            ]"
+                            placeholder="Select Target"
+                            :required="true"
+                        />
 
                         <div class="col-lg-12">
                             <div class="form-floating">

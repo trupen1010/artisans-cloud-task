@@ -1,58 +1,259 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Artisans Cloud Task - Education Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern Laravel 13 application for managing educational institutions including teachers, students, parents, announcements, and role-based permissions.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **User Management** - Teachers, Students, Parents with role-based access
+- **Announcement System** - School-wide communication with email notifications
+- **Role & Permission Management** - Granular access control system
+- **Modern Tech Stack** - Laravel 13, PHP 8.4, MySQL
+- **AI-Enhanced Development** - Laravel Boost integration for enhanced productivity
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requirements
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **PHP**: 8.4 or higher
+- **MySQL**: 8.0 or higher
+- **Composer**: 2.0 or higher
+- **Git**: Latest version
 
-## Learning Laravel
+## Quick Start
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### 1. Clone Repository
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/trupen1010/artisans-cloud-task.git
+cd artisans-cloud-task
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Automated Setup
 
-## Contributing
+The fastest way to get started is using our automated setup script:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+composer run setup
+```
 
-## Code of Conduct
+This single command will:
+- Install PHP dependencies
+- Copy `.env.example` to `.env`
+- Generate application key
+- Run database migrations
+- Install Node.js dependencies
+- Build frontend assets
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 3. Database Configuration
 
-## Security Vulnerabilities
+Edit your `.env` file with your database credentials:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=artisans_cloud_task
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
-## License
+### 4. Create Database
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+mysql -u your_username -p
+CREATE DATABASE artisans_cloud_task;
+exit
+```
+
+### 5. Run Migrations & Seeders
+
+```bash
+php artisan migrate
+```
+```bash
+php artisan db:seed --class=PermissionTableSeeder
+```
+
+### 6. Start Development
+
+```bash
+# Or start individual services
+php artisan serve              # Laravel development server
+php artisan queue:work        # Queue worker
+```
+
+The application will be available at `http://localhost:8000`
+
+## Manual Installation
+
+If you prefer manual installation or the automated setup fails:
+
+### 1. Install Dependencies
+
+```bash
+# Install PHP dependencies
+composer install
+```
+
+### 2. Environment Setup
+
+```bash
+# Copy environment file
+cp .env.example .env
+
+# Generate application key
+php artisan key:generate
+```
+
+### 3. Database Setup
+
+```bash
+# Create database (ensure MySQL is running)
+mysql -u root -p
+CREATE DATABASE artisans_cloud_task;
+exit
+
+# Update .env with your database credentials
+# Then run migrations
+php artisan migrate
+```
+
+## Development Workflow
+
+### Starting Development Environment
+
+Use the convenient development script that starts all services:
+
+```bash
+composer run dev
+```
+
+This starts:
+- **Laravel Server** (Port 8000) - Main application
+- **Queue Worker** - Background job processing
+
+### Running Tests
+
+```bash
+# Run all tests
+composer run test
+# or
+php artisan test
+
+# Run specific test
+php artisan test --filter=UserTest
+
+# Run with coverage
+php artisan test --coverage
+```
+
+### Code Quality
+
+```bash
+# Fix code style automatically
+./vendor/bin/pint
+```
+
+## Package Information
+
+### Core Framework
+- **Laravel Framework**: 13.1.1
+- **PHP Version**: 8.4
+
+### Development Tools
+- **Laravel Boost**: 2.3.4 - AI-enhanced development tools
+- **Laravel Pail**: 1.2.6 - Beautiful logs
+- **Laravel Pint**: 1.29.0 - Code styling
+- **Pest Testing**: 4.4.3 - Modern testing framework
+
+## Project Structure
+
+```
+├── app/
+│   ├── Http/Controllers/     # Application controllers
+│   ├── Models/              # Eloquent models
+│   │   ├── User.php         # User management
+│   │   ├── Teacher.php      # Teacher model
+│   │   ├── Student.php      # Student model
+│   │   ├── ParentModel.php  # Parent model
+│   │   ├── Announcement.php # Announcements
+│   │   ├── Role.php         # User roles
+│   │   └── Permission.php   # Permissions
+│   └── Helpers/             # Helper functions
+├── database/
+│   ├── migrations/          # Database migrations
+│   ├── seeders/            # Database seeders
+│   └── factories/          # Model factories
+├── resources/
+│   ├── views/              # Blade templates
+│   ├── js/                 # JavaScript files
+│   └── css/                # CSS files
+├── routes/
+│   └── web.php             # Web routes
+└── tests/                  # Test files
+```
+
+## Environment Configuration
+
+The application supports multiple environment configurations:
+
+### Local Development (.env.local)
+```env
+APP_ENV=local
+APP_DEBUG=true
+LOG_LEVEL=debug
+```
+
+### Production (.env.production)
+```env
+APP_ENV=production
+APP_DEBUG=false
+LOG_LEVEL=error
+```
+
+### Key Configuration Options
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `APP_NAME` | Application name | Laravel |
+| `APP_URL` | Base application URL | http://localhost |
+| `DB_DATABASE` | Database name | artisans_cloud_task |
+| `MAIL_MAILER` | Mail driver | log |
+| `QUEUE_CONNECTION` | Queue driver | database |
+
+## Available Commands
+
+### Composer Scripts
+
+```bash
+# Complete setup from scratch
+composer run setup
+
+# Start development environment
+composer run dev
+
+# Run tests
+composer run test
+```
+
+### Artisan Commands
+
+```bash
+# Generate application key
+php artisan key:generate
+
+# Run database migrations
+php artisan migrate
+
+# Refresh database with seeders
+php artisan migrate:fresh --seed
+
+# Clear application cache
+php artisan optimize:clear
+
+# View all routes
+php artisan route:list
+
+# Create new models, controllers, etc.
+php artisan make:model ModelName
+php artisan make:controller ControllerName
+php artisan make:test TestName
+```
