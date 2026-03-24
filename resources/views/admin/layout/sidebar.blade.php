@@ -97,6 +97,15 @@
                             </a>
                         </li>
                     @endcanany
+
+                    {{-- Announcements Management - Teachers with announcement permissions --}}
+                    @canany(['announcement.view', 'announcement.add'])
+                        <li class="nav-item">
+                            <a href="{{ auth()->user()->can('announcement.view') ? route('teacher.announcements.index') : route('teacher.announcements.create') }}" class="nav-link {{ Route::is('teacher.announcements.*') ? 'active' : null }}">
+                                <i class="mdi mdi-bullhorn fs-20"></i><span>Announcements</span>
+                            </a>
+                        </li>
+                    @endcanany
                 @endif
             </ul>
         </div>

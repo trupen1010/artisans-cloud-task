@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\UserAccessController;
+use App\Http\Controllers\Teacher\AnnouncementController as TeacherAnnouncementController;
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
 use App\Http\Controllers\Teacher\ParentController;
 use App\Http\Controllers\Teacher\StudentController;
@@ -83,4 +84,7 @@ Route::middleware(['auth-web', 'role:teacher'])->prefix('teacher')->name('teache
 
     Route::post('parents/datatable', [ParentController::class, 'datatable'])->name('parents.datatable');
     Route::resource('parents', ParentController::class)->except(['show']);
+
+    Route::post('announcements/datatable', [TeacherAnnouncementController::class, 'datatable'])->name('announcements.datatable');
+    Route::resource('announcements', TeacherAnnouncementController::class)->except(['show']);
 });
