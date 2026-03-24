@@ -33,6 +33,8 @@
                                         <th>Phone</th>
                                         <th>Teacher</th>
                                         <th>Parent</th>
+                                        <th>Created By</th>
+                                        <th>Updated By</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -76,10 +78,20 @@
                         orderable: false
                     },
                     {
+                        data: 'created_by_name',
+                        orderable: false
+                    },
+                    {
+                        data: 'updated_by_name',
+                        orderable: false
+                    },
+                    {
                         data: 'status_badge',
                         orderable: false
                     }
                 ],
+                pageLength: -1,
+                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]]
             });
         });
     </script>

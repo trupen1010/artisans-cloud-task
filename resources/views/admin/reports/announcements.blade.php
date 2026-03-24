@@ -31,6 +31,7 @@
                                         <th>Title</th>
                                         <th>Description</th>
                                         <th>Posted By</th>
+                                        <th>Updated By</th>
                                         <th>Target</th>
                                         <th>Date</th>
                                     </tr>
@@ -69,6 +70,10 @@
                         data: 'creator_name'
                     },
                     {
+                        data: 'updater_name',
+                        orderable: false
+                    },
+                    {
                         data: 'target_badge',
                         orderable: false
                     },
@@ -76,6 +81,8 @@
                         data: 'created_at'
                     }
                 ],
+                pageLength: -1,
+                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]]
             });
         });
     </script>

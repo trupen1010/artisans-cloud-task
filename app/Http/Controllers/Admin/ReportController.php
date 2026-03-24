@@ -32,7 +32,7 @@ class ReportController extends Controller
      */
     public function studentsDatatable(): JsonResponse
     {
-        $query = Student::with(['teacher.user', 'parent']);
+        $query = Student::with(['teacher.user', 'parent', 'creator', 'updater']);
 
         return DataTables::of($query)
             ->addColumn('teacher_name', function ($student) {
@@ -41,15 +41,21 @@ class ReportController extends Controller
             ->addColumn('parent_name', function ($student) {
                 return $student->parent->name ?? '<span class="text-muted">N/A</span>';
             })
+            ->addColumn('created_by_name', function ($student) {
+                return $student->creator->name ?? '<span class="text-muted">N/A</span>';
+            })
+            ->addColumn('updated_by_name', function ($student) {
+                return $student->updater->name ?? '<span class="text-muted">N/A</span>';
+            })
             ->addColumn('status_badge', function ($student) {
                 $class = $student->status === 'active' ? 'success' : 'danger';
                 $text = ucfirst($student->status);
 
                 return "<span class='badge bg-{$class}'>{$text}</span>";
             })
-            ->rawColumns(['parent_name', 'status_badge'])
+            ->rawColumns(['parent_name', 'created_by_name', 'updated_by_name', 'status_badge'])
             ->escapeColumns([])
-            ->make();
+            ->make(true);
     }
 
     public function parents(): View
@@ -62,11 +68,17 @@ class ReportController extends Controller
      */
     public function parentsDatatable(): JsonResponse
     {
-        $query = ParentModel::with('teacher.user');
+        $query = ParentModel::with(['teacher.user', 'creator', 'updater']);
 
         return DataTables::of($query)
             ->addColumn('teacher_name', function ($parent) {
                 return $parent->teacher->user->name ?? '';
+            })
+            ->addColumn('created_by_name', function ($parent) {
+                return $parent->creator->name ?? '<span class="text-muted">N/A</span>';
+            })
+            ->addColumn('updated_by_name', function ($parent) {
+                return $parent->updater->name ?? '<span class="text-muted">N/A</span>';
             })
             ->addColumn('status_badge', function ($parent) {
                 $class = $parent->status === 'active' ? 'success' : 'danger';
@@ -74,9 +86,9 @@ class ReportController extends Controller
 
                 return "<span class='badge bg-{$class}'>{$text}</span>";
             })
-            ->rawColumns(['status_badge'])
+            ->rawColumns(['created_by_name', 'updated_by_name', 'status_badge'])
             ->escapeColumns([])
-            ->make();
+            ->make(true);
     }
 
     public function teacherAnnouncements(): View
@@ -89,12 +101,18 @@ class ReportController extends Controller
      */
     public function announcementsDatatable(): JsonResponse
     {
-        $query = Announcement::with('creator')
-            ->whereIn('target', ['students', 'parents', 'both']);
+        $query = Announcement::with(['creator', 'updater' => function ($q) {
+            $q->select('id', 'name');
+        }])
+            ->whereIn('target', ['students', 'parents', 'both'])
+            ->select('announcements.*');
 
         return DataTables::of($query)
             ->addColumn('creator_name', function ($announcement) {
                 return $announcement->creator->name ?? '';
+            })
+            ->addColumn('updater_name', function ($announcement) {
+                return $announcement->updater?->name ?? '<span class="text-muted">N/A</span>';
             })
             ->addColumn('short_body', function ($announcement) {
                 return Str::limit($announcement->body, 80);
@@ -106,8 +124,8 @@ class ReportController extends Controller
 
                 return "<span class='badge bg-{$color}'>{$text}</span>";
             })
-            ->rawColumns(['target_badge'])
+            ->rawColumns(['updater_name', 'target_badge'])
             ->escapeColumns([])
-            ->make();
+            ->make(true);
     }
 }
