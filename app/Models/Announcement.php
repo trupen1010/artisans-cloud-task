@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-#[Fillable(['created_by', 'updated_by', 'title', 'body', 'target'])]
+#[Fillable(['created_by', 'updated_by', 'deleted_by', 'title', 'body', 'target'])]
 class Announcement extends Model
 {
     use AdminActionStamped;

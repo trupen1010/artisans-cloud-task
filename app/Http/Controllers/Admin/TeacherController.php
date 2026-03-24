@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\TeacherRequest;
+use App\Models\Permission;
 use App\Models\Role;
 use App\Models\Teacher;
 use App\Models\User;
@@ -89,6 +90,13 @@ class TeacherController extends Controller
             $teacherRole = Role::firstOrCreate(['name' => 'Teacher']);
             $user->roles()->syncWithoutDetaching([$teacherRole->id]);
 
+            // Assign teacher permissions to the role
+            $teacherPermissions = Permission::whereIn('module', [
+                'dashboard', 'student', 'parent', 'announcement',
+            ])->pluck('id')->toArray();
+
+            $teacherRole->permissions()->syncWithoutDetaching($teacherPermissions);
+
             Teacher::create([
                 'user_id' => $user->id,
                 'phone' => $request->phone,
@@ -137,6 +145,13 @@ class TeacherController extends Controller
 
             $teacherRole = Role::firstOrCreate(['name' => 'Teacher']);
             $teacher->user->roles()->syncWithoutDetaching([$teacherRole->id]);
+
+            // Assign teacher permissions to the role
+            $teacherPermissions = Permission::whereIn('module', [
+                'dashboard', 'student', 'parent', 'announcement',
+            ])->pluck('id')->toArray();
+
+            $teacherRole->permissions()->syncWithoutDetaching($teacherPermissions);
 
             $teacher->update([
                 'phone' => $request->phone,
