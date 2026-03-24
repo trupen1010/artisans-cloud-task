@@ -52,7 +52,7 @@ class CreateMasterAdmin extends Command
                 'name' => $name,
             ]);
         }
-        $role = Role::firstOrCreate(['name' => 'Master Admin']);
+        $role = Role::firstOrCreate(['name' => 'Admin']);
         $role->permissions()->sync($permissions);
         $admin->roles()->sync($role);
 

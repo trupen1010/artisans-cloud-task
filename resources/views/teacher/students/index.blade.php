@@ -1,4 +1,5 @@
-@extends('teacher.layout.app', [
+@extends('admin.layout.app', [
+    'layoutPrefix' => 'teacher',
     'title' => 'Students',
     'breadcrumbs' => [[
         'title' => 'Management',

@@ -42,7 +42,7 @@
 
 <body>
     @php
-        $layoutPrefix = request()->routeIs('teacher.*') ? 'teacher' : 'admin';
+        $layoutPrefix = $layoutPrefix ?? (request()->routeIs('teacher.*') ? 'teacher' : 'admin');
     @endphp
 
     {{-- Start Loader --}}
@@ -112,7 +112,7 @@
                                         class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                         class="align-middle">Profile</span></a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('admin.logout') }}"><i
+                                <a class="dropdown-item" href="{{ route($layoutPrefix.'.logout') }}"><i
                                         class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
                                         class="align-middle" data-key="t-logout">Logout</span></a>
                             </div>
@@ -123,7 +123,7 @@
         </header>
 
         {{-- ? Sidebar ? --}}
-        @include($layoutPrefix.'.layout.sidebar')
+        @include('admin.layout.sidebar')
         {{-- ? Sidebar ? --}}
 
         <div class="main-content">

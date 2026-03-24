@@ -76,6 +76,7 @@ Route::group(['prefix' => 'admin'], static function () {
 
 Route::middleware(['auth-web', 'role:teacher'])->prefix('teacher')->name('teacher.')->group(static function () {
     Route::get('dashboard', [TeacherDashboardController::class, 'index'])->name('dashboard');
+    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::post('students/datatable', [StudentController::class, 'datatable'])->name('students.datatable');
     Route::resource('students', StudentController::class)->except(['show']);
