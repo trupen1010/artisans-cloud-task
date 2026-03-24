@@ -10,4 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 class AdminRole extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
 }

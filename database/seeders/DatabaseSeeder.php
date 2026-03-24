@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,11 +14,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->command->info('🌱 Starting database seeding...');
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Seed in the correct order to respect foreign key relationships
+        $this->call([
+            // First, create users and permissions
+            UserSeeder::class,
+            PermissionTableSeeder::class,
+            RoleSeeder::class,
+
+            // Then create the main entities
+            TeacherSeeder::class,
+            ParentSeeder::class,
+            StudentSeeder::class,
+
+            // Create content
+            AnnouncementSeeder::class,
+
+            // Finally, create the relationship mappings
+            RolePermissionSeeder::class,
+            AdminRoleSeeder::class,
         ]);
+
+        $this->command->info('🎉 Database seeding completed successfully!');
     }
 }
